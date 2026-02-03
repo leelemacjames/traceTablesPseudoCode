@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB Trace Tables Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #27ae60;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .nav-links {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .nav-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 5px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .info-box {
+            background: #fff9e6;
+            border-left: 4px solid #f39c12;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-box h3 {
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            margin-left: 25px;
+            color: #856404;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .difficulty.easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty.medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty.hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .algorithm-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2ecc71;
+        }
+
+        .algorithm-title {
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .trace-table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .trace-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .trace-table th {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #27ae60;
+        }
+
+        .trace-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .trace-table input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .trace-table input:focus {
+            outline: none;
+            border-color: #2ecc71;
+            background: #f0fff4;
+        }
+
+        .trace-table .correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+        }
+
+        .trace-table .incorrect {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-reveal {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-reveal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-clear {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #c82333;
+        }
+
+        .btn-hint {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-hint:hover {
+            background: #e0a800;
+        }
+
+        .answer-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            display: none;
+        }
+
+        .answer-section.visible {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .answer-title {
+            color: #2e7d32;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .hint-section {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .hint-section.visible {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .hint-title {
+            color: #856404;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.visible {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .feedback.partial {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .question-card {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .trace-table {
+                font-size: 12px;
+            }
+
+            .trace-table th,
+            .trace-table td {
+                padding: 6px;
+            }
+        }
+
+        .note-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .note-box strong {
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 IB Trace Tables Practice</h1>
+            <p class="subtitle">DP Computer Science - Algorithm Tracing</p>
+            <div class="nav-links">
+                <a href="https://pseudocodeinteractive.netlify.app/" class="nav-link" target="_blank">📝 Pseudocode Practice</a>
+                <a href="https://pseudocode.deepjain.com/" class="nav-link" target="_blank">📖 IB Pseudocode Reference</a>
+                <a href="#" class="nav-link" onclick="scrollToQuestion(1)">Start Practice</a>
+            </div>
+        </header>
+
+        <div class="info-box">
+            <h3>📚 What is a Trace Table?</h3>
+            <ul>
+                <li>A trace table helps you follow the execution of an algorithm step-by-step</li>
+                <li>Each row represents one iteration or significant change in variable values</li>
+                <li>Track variables, conditions, and outputs as the algorithm runs</li>
+                <li>Essential for debugging and understanding algorithm flow</li>
+                <li>Fill in each cell carefully - think about what happens at each step!</li>
+            </ul>
+        </div>
+
+        <!-- Question 1: Basic If-Else -->
+        <div class="question-card" id="q1">
+            <span class="question-number">Question 1</span>
+            <span class="difficulty easy">Easy</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: Finding Maximum of Two Numbers</div>
+                <div class="code-block">a = 2
+b = 7
+
+FUNCTION max(a, b)
+    IF a > b THEN
+        RETURN a
+    ELSE
+        RETURN b
+    END IF
+END FUNCTION</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>a</th>
+                            <th>b</th>
+                            <th>a > b</th>
+                            <th>Return value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table1">
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="1" data-row="0" data-col="0"></td>
+                            <td><input type="text" data-answer="7" data-q="1" data-row="0" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="1" data-row="0" data-col="2"></td>
+                            <td><input type="text" data-answer="7" data-q="1" data-row="0" data-col="3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(1)">Check Answers</button>
+                <button class="btn-hint" onclick="toggleHint(1)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(1)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(1)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint1">
+                <div class="hint-title">💡 Hint:</div>
+                <p>Start by writing down the initial values of a and b. Then evaluate the condition a > b. Which value should be returned?</p>
+            </div>
+
+            <div class="feedback" id="feedback1"></div>
+
+            <div class="answer-section" id="solution1">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <div class="trace-table-container">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>a</th>
+                                <th>b</th>
+                                <th>a > b</th>
+                                <th>Return value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2</td>
+                                <td>7</td>
+                                <td>false</td>
+                                <td>7</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 15px; color: #2e7d32;"><strong>Explanation:</strong> Since 2 is not greater than 7 (false), the ELSE branch executes and returns b, which is 7.</p>
+            </div>
+        </div>
+
+        <!-- Question 2: While Loop - Factorial -->
+        <div class="question-card" id="q2">
+            <span class="question-number">Question 2</span>
+            <span class="difficulty medium">Medium</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: Factorial Calculation using While Loop</div>
+                <div class="code-block">number = 5
+factorial = number
+
+WHILE number > 2
+    number = number - 1
+    factorial = factorial * number
+END WHILE
+
+OUTPUT(factorial)</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>number > 2</th>
+                            <th>number</th>
+                            <th>factorial</th>
+                            <th>output</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table2">
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="5" data-q="2" data-row="0" data-col="0"></td>
+                            <td><input type="text" data-answer="5" data-q="2" data-row="0" data-col="1"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="T" data-q="2" data-row="1" data-col="0"></td>
+                            <td><input type="text" data-answer="4" data-q="2" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="20" data-q="2" data-row="1" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="T" data-q="2" data-row="2" data-col="0"></td>
+                            <td><input type="text" data-answer="3" data-q="2" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="60" data-q="2" data-row="2" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="T" data-q="2" data-row="3" data-col="0"></td>
+                            <td><input type="text" data-answer="2" data-q="2" data-row="3" data-col="1"></td>
+                            <td><input type="text" data-answer="120" data-q="2" data-row="3" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="F" data-q="2" data-row="4" data-col="0"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="120" data-q="2" data-row="4" data-col="1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(2)">Check Answers</button>
+                <button class="btn-hint" onclick="toggleHint(2)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(2)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(2)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint2">
+                <div class="hint-title">💡 Hint:</div>
+                <p>This calculates 5! (5 factorial = 5 × 4 × 3 × 2 × 1). Start with number=5 and factorial=5. In each iteration, decrease number by 1 and multiply factorial by the new number value. Use T for true and F for false.</p>
+            </div>
+
+            <div class="feedback" id="feedback2"></div>
+
+            <div class="answer-section" id="solution2">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <div class="trace-table-container">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>number > 2</th>
+                                <th>number</th>
+                                <th>factorial</th>
+                                <th>output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>5</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>T</td>
+                                <td>4</td>
+                                <td>20</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>T</td>
+                                <td>3</td>
+                                <td>60</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>T</td>
+                                <td>2</td>
+                                <td>120</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td></td>
+                                <td></td>
+                                <td>120</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 15px; color: #2e7d32;"><strong>Explanation:</strong> Loop continues while number > 2. Each iteration: number decreases by 1, factorial multiplies by new number. When number=2, condition becomes false, loop exits, and 120 is output.</p>
+            </div>
+        </div>
+
+        <!-- Question 3: While Loop - i and j -->
+        <div class="question-card" id="q3">
+            <span class="question-number">Question 3</span>
+            <span class="difficulty medium">Medium</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: Converging Values</div>
+                <div class="code-block">i = 0
+j = 10
+
+WHILE i < j
+    i = i + 1
+    j = j - 1
+END WHILE
+
+OUTPUT(i)
+OUTPUT(j)</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>i < j</th>
+                            <th>i</th>
+                            <th>j</th>
+                            <th>Output</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table3">
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="0" data-q="3" data-row="0" data-col="0"></td>
+                            <td><input type="text" data-answer="10" data-q="3" data-row="0" data-col="1"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="0 < 10" data-q="3" data-row="1" data-col="0"></td>
+                            <td><input type="text" data-answer="1" data-q="3" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="9" data-q="3" data-row="1" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1 < 9" data-q="3" data-row="2" data-col="0"></td>
+                            <td><input type="text" data-answer="2" data-q="3" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="8" data-q="3" data-row="2" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2 < 8" data-q="3" data-row="3" data-col="0"></td>
+                            <td><input type="text" data-answer="3" data-q="3" data-row="3" data-col="1"></td>
+                            <td><input type="text" data-answer="7" data-q="3" data-row="3" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3 < 7" data-q="3" data-row="4" data-col="0"></td>
+                            <td><input type="text" data-answer="4" data-q="3" data-row="4" data-col="1"></td>
+                            <td><input type="text" data-answer="6" data-q="3" data-row="4" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="4 < 6" data-q="3" data-row="5" data-col="0"></td>
+                            <td><input type="text" data-answer="5" data-q="3" data-row="5" data-col="1"></td>
+                            <td><input type="text" data-answer="5" data-q="3" data-row="5" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="5 < 5 (FALSE)" data-q="3" data-row="6" data-col="0"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="5 5" data-q="3" data-row="6" data-col="1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(3)">Check Answers</button>
+                <button class="btn-hint" onclick="toggleHint(3)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(3)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(3)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint3">
+                <div class="hint-title">💡 Hint:</div>
+                <p>The loop runs while i is less than j. In each iteration, i increases by 1 and j decreases by 1. They meet in the middle! Write conditions like "0 < 10" or just "true".</p>
+            </div>
+
+            <div class="feedback" id="feedback3"></div>
+
+            <div class="answer-section" id="solution3">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <p style="margin-bottom: 15px; color: #2e7d32;"><strong>Explanation:</strong> This loop converges i and j toward each other. They meet at 5, making the condition false (5 < 5 is false), so the loop exits and both output 5.</p>
+            </div>
+        </div>
+
+        <!-- Question 4: For Loop - Simple Multiplication -->
+        <div class="question-card" id="q4">
+            <span class="question-number">Question 4</span>
+            <span class="difficulty easy">Easy</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: For Loop with Multiplication</div>
+                <div class="code-block">FOR i = 1 TO 4
+    OUTPUT i * 2
+ENDFOR</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>i</th>
+                            <th>output</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table4">
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="4" data-row="0" data-col="0"></td>
+                            <td><input type="text" data-answer="2" data-q="4" data-row="0" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="4" data-row="1" data-col="0"></td>
+                            <td><input type="text" data-answer="4" data-q="4" data-row="1" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3" data-q="4" data-row="2" data-col="0"></td>
+                            <td><input type="text" data-answer="6" data-q="4" data-row="2" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="4" data-q="4" data-row="3" data-col="0"></td>
+                            <td><input type="text" data-answer="8" data-q="4" data-row="3" data-col="1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(4)">Check Answers</button>
+                <button class="btn-hint" onclick="toggleHint(4)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(4)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(4)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint4">
+                <div class="hint-title">💡 Hint:</div>
+                <p>A FOR loop runs a specific number of times. Here i goes from 1 to 4. For each value of i, calculate i × 2 and write it as output.</p>
+            </div>
+
+            <div class="feedback" id="feedback4"></div>
+
+            <div class="answer-section" id="solution4">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <p style="margin-bottom: 15px; color: #2e7d32;"><strong>Explanation:</strong> This is a simple counting loop that outputs double the counter value. Output sequence: 2, 4, 6, 8.</p>
+            </div>
+        </div>
+
+        <!-- Question 5: FizzBuzz -->
+        <div class="question-card" id="q5">
+            <span class="question-number">Question 5</span>
+            <span class="difficulty medium">Medium</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: FizzBuzz</div>
+                <div class="code-block">FOR i FROM 0 TO 6
+    IF i MOD 3 == 0 AND i MOD 5 == 0 THEN
+        OUTPUT "Fizz-Buzz"
+    ELSE IF i MOD 3 == 0 THEN
+        OUTPUT "Fizz"
+    ELSE IF i MOD 5 == 0 THEN
+        OUTPUT "Buzz"
+    ELSE
+        OUTPUT i
+    END IF
+END FOR
+OUTPUT("The End")</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>i</th>
+                            <th>i MOD 3 == 0</th>
+                            <th>i MOD 5 == 0</th>
+                            <th>output</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table5">
+                        <tr>
+                            <td><input type="text" data-answer="0" data-q="5" data-row="0" data-col="0"></td>
+                            <td><input type="text" data-answer="true" data-q="5" data-row="0" data-col="1"></td>
+                            <td><input type="text" data-answer="true" data-q="5" data-row="0" data-col="2"></td>
+                            <td><input type="text" data-answer="Fizz-Buzz" data-q="5" data-row="0" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="5" data-row="1" data-col="0"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="1" data-col="2"></td>
+                            <td><input type="text" data-answer="1" data-q="5" data-row="1" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="5" data-row="2" data-col="0"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="2" data-col="2"></td>
+                            <td><input type="text" data-answer="2" data-q="5" data-row="2" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3" data-q="5" data-row="3" data-col="0"></td>
+                            <td><input type="text" data-answer="true" data-q="5" data-row="3" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="3" data-col="2"></td>
+                            <td><input type="text" data-answer="Fizz" data-q="5" data-row="3" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="4" data-q="5" data-row="4" data-col="0"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="4" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="4" data-col="2"></td>
+                            <td><input type="text" data-answer="4" data-q="5" data-row="4" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="5" data-q="5" data-row="5" data-col="0"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="5" data-col="1"></td>
+                            <td><input type="text" data-answer="true" data-q="5" data-row="5" data-col="2"></td>
+                            <td><input type="text" data-answer="Buzz" data-q="5" data-row="5" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="6" data-q="5" data-row="6" data-col="0"></td>
+                            <td><input type="text" data-answer="true" data-q="5" data-row="6" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="5" data-row="6" data-col="2"></td>
+                            <td><input type="text" data-answer="Fizz" data-q="5" data-row="6" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><input type="text" data-answer="The End" data-q="5" data-row="7" data-col="0" placeholder="Final output"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(5)">Check Answers</button>
+                <button class="btn-hint" onclick="toggleHint(5)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(5)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(5)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint5">
+                <div class="hint-title">💡 Hint:</div>
+                <p>MOD gives the remainder. i MOD 3 == 0 is true when i is divisible by 3 (0, 3, 6). Check conditions in order: both, then 3, then 5, else the number. Remember: 0 is divisible by everything!</p>
+            </div>
+
+            <div class="feedback" id="feedback5"></div>
+
+            <div class="answer-section" id="solution5">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <p style="margin-bottom: 15px; color: #2e7d32;"><strong>Explanation:</strong> Classic FizzBuzz! Multiples of both 3 and 5 → "Fizz-Buzz", multiples of 3 → "Fizz", multiples of 5 → "Buzz", otherwise the number itself. Zero is divisible by everything, so it outputs "Fizz-Buzz".</p>
+            </div>
+        </div>
+
+        <!-- Question 6: Nested For Loop -->
+        <div class="question-card" id="q6">
+            <span class="question-number">Question 6</span>
+            <span class="difficulty hard">Hard</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: Nested For Loops</div>
+                <div class="code-block">num = 0
+total = 0
+
+FOR i = 1 TO 3
+    FOR j = 1 TO 3
+        num = j * i
+        total = total + num
+    ENDFOR
+ENDFOR
+
+OUTPUT total</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+            <div class="note-box">
+                <strong>Note:</strong> In nested loops, the inner loop completes all its iterations for each iteration of the outer loop. Pay close attention to which loop variable is changing!
+            </div>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>i</th>
+                            <th>j</th>
+                            <th>num</th>
+                            <th>total</th>
+                            <th>output</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table6">
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="0" data-q="6" data-row="0" data-col="0"></td>
+                            <td><input type="text" data-answer="0" data-q="6" data-row="0" data-col="1"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="0"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="2"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="3"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="2" data-col="0"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="2" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="3" data-col="0"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="3" data-col="1"></td>
+                            <td><input type="text" data-answer="6" data-q="6" data-row="3" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="4" data-col="0"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="4" data-col="1"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="4" data-col="2"></td>
+                            <td><input type="text" data-answer="8" data-q="6" data-row="4" data-col="3"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="5" data-col="0"></td>
+                            <td><input type="text" data-answer="4" data-q="6" data-row="5" data-col="1"></td>
+                            <td><input type="text" data-answer="12" data-q="6" data-row="5" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="6" data-col="0"></td>
+                            <td><input type="text" data-answer="6" data-q="6" data-row="6" data-col="1"></td>
+                            <td><input type="text" data-answer="18" data-q="6" data-row="6" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="7" data-col="0"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="7" data-col="1"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="7" data-col="2"></td>
+                            <td><input type="text" data-answer="21" data-q="6" data-row="7" data-col="3"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="8" data-col="0"></td>
+                            <td><input type="text" data-answer="6" data-q="6" data-row="8" data-col="1"></td>
+                            <td><input type="text" data-answer="27" data-q="6" data-row="8" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="9" data-col="0"></td>
+                            <td><input type="text" data-answer="9" data-q="6" data-row="9" data-col="1"></td>
+                            <td><input type="text" data-answer="36" data-q="6" data-row="9" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="36" data-q="6" data-row="10" data-col="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(6)">Check Answers</button>
+                <button class="btn-hint" onclick="toggleHint(6)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(6)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(6)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint6">
+                <div class="hint-title">💡 Hint:</div>
+                <p>For each value of i (1, 2, 3), j runs through all its values (1, 2, 3). So when i=1, j goes 1→2→3. Then i becomes 2, and j again goes 1→2→3. Calculate num = j × i and add to total each time. This creates a multiplication table sum!</p>
+            </div>
+
+            <div class="feedback" id="feedback6"></div>
+
+            <div class="answer-section" id="solution6">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <p style="margin-bottom: 15px; color: #2e7d32;"><strong>Explanation:</strong> This is a nested loop calculating the sum of all products in a 3×3 multiplication table: (1×1 + 1×2 + 1×3) + (2×1 + 2×2 + 2×3) + (3×1 + 3×2 + 3×3) = 1+2+3+2+4+6+3+6+9 = 36</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 IB Trace Tables Practice | DP Computer Science</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Practice makes perfect! Work through each trace table carefully.</p>
+            <p style="margin-top: 5px; font-size: 0.85em;">Companion to <a href="https://pseudocodeinteractive.netlify.app/" style="color: white; text-decoration: underline;">Pseudocode Interactive</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Answer checking with flexible matching
+        function normalizeAnswer(answer) {
+            return answer.toString().toLowerCase().trim()
+                .replace(/\s+/g, ' ')
+                .replace(/true/gi, 't')
+                .replace(/false/gi, 'f')
+                .replace(/fizz-buzz/gi, 'fizzbuzz')
+                .replace(/the end/gi, 'theend');
+        }
+
+        function checkAnswers(questionNum) {
+            const inputs = document.querySelectorAll(`input[data-q="${questionNum}"]`);
+            let correct = 0;
+            let total = 0;
+
+            inputs.forEach(input => {
+                if (input.value.trim() === '') return;
+                
+                total++;
+                const userAnswer = normalizeAnswer(input.value);
+                const correctAnswer = normalizeAnswer(input.dataset.answer);
+                
+                // Flexible matching
+                const isCorrect = userAnswer === correctAnswer || 
+                                 userAnswer.includes(correctAnswer) ||
+                                 correctAnswer.includes(userAnswer);
+
+                if (isCorrect) {
+                    input.classList.add('correct');
+                    input.classList.remove('incorrect');
+                    correct++;
+                } else {
+                    input.classList.add('incorrect');
+                    input.classList.remove('correct');
+                }
+            });
+
+            const feedback = document.getElementById(`feedback${questionNum}`);
+            feedback.classList.add('visible');
+
+            if (correct === total && total > 0) {
+                feedback.className = 'feedback visible success';
+                feedback.innerHTML = `🎉 Perfect! All ${correct} answers correct!`;
+            } else if (correct > 0) {
+                feedback.className = 'feedback visible partial';
+                feedback.innerHTML = `👍 Good progress! ${correct} out of ${total} correct. Keep trying!`;
+            } else {
+                feedback.className = 'feedback visible error';
+                feedback.innerHTML = `📝 Not quite. Review the algorithm and try again. Remember to trace step-by-step!`;
+            }
+
+            // Auto-save progress
+            saveProgress(questionNum);
+        }
+
+        function toggleAnswer(questionNum) {
+            const solution = document.getElementById(`solution${questionNum}`);
+            solution.classList.toggle('visible');
+        }
+
+        function toggleHint(questionNum) {
+            const hint = document.getElementById(`hint${questionNum}`);
+            hint.classList.toggle('visible');
+        }
+
+        function clearTable(questionNum) {
+            if (confirm('Clear all your answers for this question?')) {
+                const inputs = document.querySelectorAll(`input[data-q="${questionNum}"]`);
+                inputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('correct', 'incorrect');
+                });
+                
+                const feedback = document.getElementById(`feedback${questionNum}`);
+                if (feedback) {
+                    feedback.classList.remove('visible');
+                }
+            }
+        }
+
+        function scrollToQuestion(num) {
+            document.getElementById(`q${num}`).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Auto-save and load functionality
+        function saveProgress(questionNum) {
+            const inputs = document.querySelectorAll(`input[data-q="${questionNum}"]`);
+            const data = {};
+            inputs.forEach((input, index) => {
+                data[index] = input.value;
+            });
+            localStorage.setItem(`trace_q${questionNum}`, JSON.stringify(data));
+        }
+
+        function loadProgress() {
+            for (let q = 1; q <= 6; q++) {
+                const saved = localStorage.getItem(`trace_q${q}`);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    const inputs = document.querySelectorAll(`input[data-q="${q}"]`);
+                    inputs.forEach((input, index) => {
+                        if (data[index]) {
+                            input.value = data[index];
+                        }
+                    });
+                }
+            }
+        }
+
+        // Auto-save on input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                const questionNum = this.dataset.q;
+                if (questionNum) {
+                    saveProgress(questionNum);
+                }
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + Enter to check answers for focused input
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                const focused = document.activeElement;
+                if (focused.tagName === 'INPUT' && focused.dataset.q) {
+                    checkAnswers(parseInt(focused.dataset.q));
+                }
+            }
+        });
+
+        // Load saved progress on page load
+        window.addEventListener('load', loadProgress);
+
+        // Add tab navigation within tables
+        document.querySelectorAll('.trace-table').forEach(table => {
+            const inputs = table.querySelectorAll('input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Tab' && !e.shiftKey && index < inputs.length - 1) {
+                        e.preventDefault();
+                        inputs[index + 1].focus();
+                    } else if (e.key === 'Tab' && e.shiftKey && index > 0) {
+                        e.preventDefault();
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
