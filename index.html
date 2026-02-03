@@ -1173,7 +1173,7 @@ end method</div>
             <div class="feedback" id="feedback7-return"></div>
 
             <div class="button-group">
-                <button class="btn-check" onclick="checkAnswers(7)">Check Table</button>
+                <button class="btn-check" onclick="checkAnswers(7)">Check Answers</button>
                 <button class="btn-hint" onclick="toggleHint(7)">Show Hint</button>
                 <button class="btn-reveal" onclick="toggleAnswer(7)">Reveal Solution</button>
                 <button class="btn-clear" onclick="clearTable(7)">Clear Table</button>
@@ -1201,18 +1201,19 @@ end method</div>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+                            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>(init)</td></tr>
                             <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>i</td></tr>
                             <tr><td>2</td><td>0</td><td>2</td><td>2</td><td>t</td></tr>
                             <tr><td>3</td><td>1</td><td>3</td><td>2</td><td>(space)</td></tr>
                             <tr><td>4</td><td>1</td><td>4</td><td>3</td><td>i</td></tr>
                             <tr><td>5</td><td>1</td><td>5</td><td>4</td><td>s</td></tr>
-                            <tr><td>Exit</td><td colspan="4">STR[5] = '.'</td></tr>
+                            <tr><td>Exit</td><td colspan="4">STR[5] = '.' - loop terminates</td></tr>
                         </tbody>
                     </table>
                 </div>
                 <p style="margin-top: 15px; color: #2e7d32;"><strong>Return value: 2</strong></p>
-                <p style="margin-top: 10px; color: #2e7d32;"><strong>Explanation:</strong> The algorithm counts spaces (C=1) and non-space characters (T=4) until it hits a period. It calculates average word length: T / (C + 1) = 4 / 2 = 2. The string "it is" has 2 words with 4 total letters, so average length is 2.</p>
+                <p style="margin-top: 10px; color: #2e7d32;"><strong>Calculation:</strong> T / (C + 1) = 4 / (1 + 1) = 4 / 2 = 2</p>
+                <p style="margin-top: 10px; color: #555; line-height: 1.8;"><strong>Explanation:</strong> The algorithm counts spaces (C=1) and non-space characters (T=4) until it encounters a period. It calculates average word length by dividing total characters by number of words. The string "it is" has 2 words with 4 total letters, so average length is 2 characters per word.</p>
             </div>
         </div>
 
@@ -1516,7 +1517,7 @@ end method</div>
             </div>
 
             <div class="button-group">
-                <button class="btn-check" onclick="checkAllPrimes()">Check All Parts</button>
+                <button class="btn-check" onclick="checkAllPrimes()">Check Answers</button>
                 <button class="btn-hint" onclick="toggleHint(8)">Show Hint</button>
                 <button class="btn-reveal" onclick="toggleAnswer(8)">Reveal Solution</button>
                 <button class="btn-clear" onclick="clearAllPrimes()">Clear All</button>
@@ -1538,14 +1539,81 @@ end method</div>
             <div class="feedback" id="feedback8"></div>
 
             <div class="answer-section" id="solution8">
-                <div class="answer-title">✓ Complete Solution:</div>
+                <div class="answer-title">✓ Complete Solution for All Three Parts:</div>
                 
-                <p style="color: #2e7d32; margin-bottom: 15px;"><strong>Part a) PRIME(9) returns false</strong> - 9 is divisible by 3, so it's not prime.</p>
-                <p style="color: #2e7d32; margin-bottom: 15px;"><strong>Part b) PRIME(20) returns false</strong> - 20 is divisible by 2, so it's not prime.</p>
-                <p style="color: #2e7d32; margin-bottom: 15px;"><strong>Part c) PRIME(17) returns true</strong> - 17 has no divisors from 2 to 4, so it's prime!</p>
+                <h4 style="color: #2e7d32; margin: 20px 0 10px 0;">Part a) PRIME(9) - Returns FALSE</h4>
+                <div class="trace-table-container">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>Loop Iteration</th>
+                                <th>NUMBER</th>
+                                <th>FACTOR</th>
+                                <th>FACTOR²</th>
+                                <th>FOUND</th>
+                                <th>P</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0 (init)</td><td>9</td><td>2</td><td>4</td><td>false</td><td>false</td></tr>
+                            <tr><td>1</td><td>9</td><td>3</td><td>9</td><td>false</td><td>-</td></tr>
+                            <tr><td>2</td><td>9</td><td>4</td><td>16</td><td>true</td><td>-</td></tr>
+                            <tr><td>Exit</td><td colspan="5">FOUND = true, so loop exits. P = NOT FOUND = false</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="color: #555; margin-top: 10px;">9 mod 3 = 0, so 9 is divisible by 3. Therefore 9 is not prime. ✗</p>
                 
-                <p style="margin-top: 20px; color: #2e7d32;"><strong>How the algorithm works:</strong></p>
-                <p style="color: #555; line-height: 1.8;">The algorithm efficiently checks primality by testing divisibility from 2 up to the square root of NUMBER. If any factor divides evenly (mod = 0), FOUND becomes true and the loop can exit early. The key optimization is FACTOR * FACTOR <= NUMBER, which means we only need to check up to √NUMBER. If no factors are found, the number is prime (P = NOT FOUND = true).</p>
+                <h4 style="color: #2e7d32; margin: 20px 0 10px 0;">Part b) PRIME(20) - Returns FALSE</h4>
+                <div class="trace-table-container">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>Loop Iteration</th>
+                                <th>NUMBER</th>
+                                <th>FACTOR</th>
+                                <th>FACTOR²</th>
+                                <th>FOUND</th>
+                                <th>P</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0 (init)</td><td>20</td><td>2</td><td>4</td><td>false</td><td>false</td></tr>
+                            <tr><td>1</td><td>20</td><td>3</td><td>9</td><td>true</td><td>-</td></tr>
+                            <tr><td>Exit</td><td colspan="5">FOUND = true, so loop exits. P = NOT FOUND = false</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="color: #555; margin-top: 10px;">20 mod 2 = 0, so 20 is divisible by 2. Therefore 20 is not prime. ✗</p>
+                
+                <h4 style="color: #2e7d32; margin: 20px 0 10px 0;">Part c) PRIME(17) - Returns TRUE</h4>
+                <div class="trace-table-container">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>Loop Iteration</th>
+                                <th>NUMBER</th>
+                                <th>FACTOR</th>
+                                <th>FACTOR²</th>
+                                <th>FOUND</th>
+                                <th>P</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0 (init)</td><td>17</td><td>2</td><td>4</td><td>false</td><td>false</td></tr>
+                            <tr><td>1</td><td>17</td><td>3</td><td>9</td><td>false</td><td>-</td></tr>
+                            <tr><td>2</td><td>17</td><td>4</td><td>16</td><td>false</td><td>-</td></tr>
+                            <tr><td>3</td><td>17</td><td>5</td><td>25</td><td>false</td><td>-</td></tr>
+                            <tr><td>Exit</td><td colspan="5">5² = 25 > 17, loop exits. P = NOT FOUND = true</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="color: #555; margin-top: 10px;">Checked divisibility by 2, 3, 4 - none divide evenly. 5² > 17 so we stop. Therefore 17 is prime! ✓</p>
+                
+                <div style="margin-top: 25px; padding: 20px; background: #e8f5e9; border-radius: 8px; border-left: 4px solid #4caf50;">
+                    <h4 style="color: #2e7d32; margin-bottom: 10px;">How the Algorithm Works:</h4>
+                    <p style="color: #555; line-height: 1.8;">This algorithm efficiently checks primality by testing divisibility from 2 up to √NUMBER. The key optimization is the condition <strong>(FACTOR * FACTOR) <= NUMBER</strong>, which means we only check factors up to the square root. Why? Because if a number n has a factor greater than √n, it must also have a corresponding factor less than √n. If any factor divides evenly (NUMBER mod FACTOR = 0), FOUND becomes true and we know it's composite. If the loop completes without finding factors, FOUND stays false, so P = NOT FOUND = true (it's prime!).</p>
+                </div>
             </div>
         </div>
 
@@ -1682,7 +1750,7 @@ output TOTAL</div>
             <div class="feedback" id="feedback9-output"></div>
 
             <div class="button-group">
-                <button class="btn-check" onclick="checkAnswers(9)">Check Table</button>
+                <button class="btn-check" onclick="checkAnswers(9)">Check Answers</button>
                 <button class="btn-hint" onclick="toggleHint(9)">Show Hint</button>
                 <button class="btn-reveal" onclick="toggleAnswer(9)">Reveal Solution</button>
                 <button class="btn-clear" onclick="clearTable(9)">Clear Table</button>
@@ -1699,16 +1767,53 @@ output TOTAL</div>
 
             <div class="answer-section" id="solution9">
                 <div class="answer-title">✓ Complete Solution:</div>
-                <p style="margin-bottom: 15px; color: #2e7d32;"><strong>Output: 15</strong></p>
-                <p style="color: #2e7d32; line-height: 1.8;"><strong>Explanation:</strong> This algorithm calculates the 5th triangular number. For each value of I (0 to 4), the inner loop J runs from 0 to I, incrementing TOTAL each time:</p>
-                <ul style="margin-left: 25px; color: #555; line-height: 1.8;">
-                    <li>I=0: J runs once (0 to 0) → TOTAL = 1</li>
-                    <li>I=1: J runs twice (0 to 1) → TOTAL = 3</li>
-                    <li>I=2: J runs 3 times (0 to 2) → TOTAL = 6</li>
-                    <li>I=3: J runs 4 times (0 to 3) → TOTAL = 10</li>
-                    <li>I=4: J runs 5 times (0 to 4) → TOTAL = 15</li>
-                </ul>
-                <p style="margin-top: 15px; color: #2e7d32;">This gives us 1+2+3+4+5 = 15, which is the sum formula n(n+1)/2 = 5×6/2 = 15</p>
+                
+                <div class="trace-table-container">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>I</th>
+                                <th>J</th>
+                                <th>TOTAL</th>
+                                <th>Explanation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Init</td><td>-</td><td>0</td><td>Starting value</td></tr>
+                            <tr style="background: #f0fff0;"><td>0</td><td>0</td><td>1</td><td>I=0: J runs 0→0 (1 time)</td></tr>
+                            <tr style="background: #f0f8ff;"><td>1</td><td>0</td><td>2</td><td rowspan="2">I=1: J runs 0→1 (2 times)</td></tr>
+                            <tr style="background: #f0f8ff;"><td></td><td>1</td><td>3</td></tr>
+                            <tr style="background: #fff0f0;"><td>2</td><td>0</td><td>4</td><td rowspan="3">I=2: J runs 0→2 (3 times)</td></tr>
+                            <tr style="background: #fff0f0;"><td></td><td>1</td><td>5</td></tr>
+                            <tr style="background: #fff0f0;"><td></td><td>2</td><td>6</td></tr>
+                            <tr style="background: #fffacd;"><td>3</td><td>0</td><td>7</td><td rowspan="4">I=3: J runs 0→3 (4 times)</td></tr>
+                            <tr style="background: #fffacd;"><td></td><td>1</td><td>8</td></tr>
+                            <tr style="background: #fffacd;"><td></td><td>2</td><td>9</td></tr>
+                            <tr style="background: #fffacd;"><td></td><td>3</td><td>10</td></tr>
+                            <tr style="background: #f0f0ff;"><td>4</td><td>0</td><td>11</td><td rowspan="5">I=4: J runs 0→4 (5 times)</td></tr>
+                            <tr style="background: #f0f0ff;"><td></td><td>1</td><td>12</td></tr>
+                            <tr style="background: #f0f0ff;"><td></td><td>2</td><td>13</td></tr>
+                            <tr style="background: #f0f0ff;"><td></td><td>3</td><td>14</td></tr>
+                            <tr style="background: #f0f0ff;"><td></td><td>4</td><td>15</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p style="margin-top: 20px; color: #2e7d32; font-size: 1.2em;"><strong>Output: 15</strong></p>
+                
+                <div style="margin-top: 20px; padding: 20px; background: #e8f5e9; border-radius: 8px; border-left: 4px solid #4caf50;">
+                    <h4 style="color: #2e7d32; margin-bottom: 10px;">Understanding the Pattern:</h4>
+                    <p style="color: #555; line-height: 1.8; margin-bottom: 10px;">This algorithm calculates the <strong>5th triangular number</strong>. The inner loop's upper bound depends on the outer loop variable I:</p>
+                    <ul style="margin-left: 25px; color: #555; line-height: 1.8;">
+                        <li>When I=0: J goes from 0 to 0 → adds 1 to TOTAL</li>
+                        <li>When I=1: J goes from 0 to 1 → adds 2 to TOTAL</li>
+                        <li>When I=2: J goes from 0 to 2 → adds 3 to TOTAL</li>
+                        <li>When I=3: J goes from 0 to 3 → adds 4 to TOTAL</li>
+                        <li>When I=4: J goes from 0 to 4 → adds 5 to TOTAL</li>
+                    </ul>
+                    <p style="color: #555; line-height: 1.8; margin-top: 10px;"><strong>Total iterations:</strong> 1 + 2 + 3 + 4 + 5 = 15</p>
+                    <p style="color: #2e7d32; margin-top: 10px;"><strong>Formula verification:</strong> The nth triangular number = n(n+1)/2 = 5(6)/2 = 15 ✓</p>
+                </div>
             </div>
         </div>
 
@@ -1796,6 +1901,28 @@ output TOTAL</div>
                 const feedback = document.getElementById(`feedback${questionNum}`);
                 if (feedback) {
                     feedback.classList.remove('visible');
+                }
+                
+                // Clear return/output feedback if exists
+                const returnFeedback = document.getElementById(`feedback${questionNum}-return`);
+                if (returnFeedback) {
+                    returnFeedback.classList.remove('visible');
+                }
+                const outputFeedback = document.getElementById(`feedback${questionNum}-output`);
+                if (outputFeedback) {
+                    outputFeedback.classList.remove('visible');
+                }
+                
+                // Clear return/output inputs
+                const returnInput = document.getElementById(`return${questionNum}`);
+                if (returnInput) {
+                    returnInput.value = '';
+                    returnInput.classList.remove('correct', 'incorrect');
+                }
+                const outputInput = document.getElementById(`output${questionNum}`);
+                if (outputInput) {
+                    outputInput.value = '';
+                    outputInput.classList.remove('correct', 'incorrect');
                 }
             }
         }
@@ -1893,23 +2020,61 @@ output TOTAL</div>
 
         // Check all parts of prime question
         function checkAllPrimes() {
-            checkAnswers('8a');
-            checkAnswers('8b');
-            checkAnswers('8c');
+            let totalCorrect = 0;
+            let totalInputs = 0;
+            
+            // Check each part
+            ['8a', '8b', '8c'].forEach(part => {
+                const inputs = document.querySelectorAll(`input[data-q="${part}"]`);
+                inputs.forEach(input => {
+                    if (input.value.trim() === '') return;
+                    
+                    totalInputs++;
+                    const userAnswer = normalizeAnswer(input.value);
+                    const correctAnswer = normalizeAnswer(input.dataset.answer);
+                    
+                    const isCorrect = userAnswer === correctAnswer || 
+                                     userAnswer.includes(correctAnswer) ||
+                                     correctAnswer.includes(userAnswer);
+
+                    if (isCorrect) {
+                        input.classList.add('correct');
+                        input.classList.remove('incorrect');
+                        totalCorrect++;
+                    } else {
+                        input.classList.add('incorrect');
+                        input.classList.remove('correct');
+                    }
+                });
+            });
             
             // Overall feedback
             const feedback = document.getElementById('feedback8');
             feedback.classList.add('visible');
-            feedback.className = 'feedback visible success';
-            feedback.innerHTML = '✅ All three parts checked! Review any red cells and compare with the solution.';
+            
+            if (totalCorrect === totalInputs && totalInputs > 0) {
+                feedback.className = 'feedback visible success';
+                feedback.innerHTML = `🎉 Perfect! All ${totalCorrect} answers correct across all three test cases!`;
+            } else if (totalCorrect > 0) {
+                feedback.className = 'feedback visible partial';
+                feedback.innerHTML = `👍 Good progress! ${totalCorrect} out of ${totalInputs} correct. Review the red cells.`;
+            } else {
+                feedback.className = 'feedback visible error';
+                feedback.innerHTML = `📝 Not quite. Remember: loop continues while FACTOR² ≤ NUMBER and no factor found yet.`;
+            }
         }
 
         // Clear all parts of prime question
         function clearAllPrimes() {
             if (confirm('Clear all answers for all three parts of the prime question?')) {
-                clearTable('8a');
-                clearTable('8b');
-                clearTable('8c');
+                ['8a', '8b', '8c'].forEach(part => {
+                    const inputs = document.querySelectorAll(`input[data-q="${part}"]`);
+                    inputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('correct', 'incorrect');
+                    });
+                });
+                
                 const feedback = document.getElementById('feedback8');
                 if (feedback) {
                     feedback.classList.remove('visible');
