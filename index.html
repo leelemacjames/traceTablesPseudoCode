@@ -1060,6 +1060,658 @@ OUTPUT total</div>
             </div>
         </div>
 
+        <!-- Question 7: String Parsing -->
+        <div class="question-card" id="q7">
+            <span class="question-number">Question 7</span>
+            <span class="difficulty hard">Hard</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: String Character Analysis</div>
+                <div class="note-box">
+                    <strong>Note:</strong> A string is an array of characters. STR[0] is the first character, STR[1] is the second, etc. A space character is represented as " ".
+                </div>
+                <div class="code-block">method CALC(String STR)
+    C = 0  // count of spaces
+    S = 0  // string index
+    T = 0  // count of non-space characters
+    
+    loop until STR[S] = "."
+        if STR[S] = " " then
+            C = C + 1
+        else
+            T = T + 1
+        end if
+        S = S + 1
+    end loop
+    
+    return T / (C + 1)
+end method</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table for the call: <strong>CALC("it is.")</strong></p>
+            <p style="margin: 10px 0; color: #666; font-size: 0.95em;">Note: First row shows initialization before entering the loop.</p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>Loop Iteration</th>
+                            <th>STR</th>
+                            <th>C</th>
+                            <th>S</th>
+                            <th>T</th>
+                            <th>STR[S]</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table7">
+                        <tr>
+                            <td><input type="text" data-answer="0" data-q="7" data-row="0" data-col="0"></td>
+                            <td style="background: #f0f0f0;">it is.</td>
+                            <td><input type="text" data-answer="0" data-q="7" data-row="0" data-col="1"></td>
+                            <td><input type="text" data-answer="0" data-q="7" data-row="0" data-col="2"></td>
+                            <td><input type="text" data-answer="0" data-q="7" data-row="0" data-col="3"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="7" data-row="1" data-col="0"></td>
+                            <td style="background: #f0f0f0;">it is.</td>
+                            <td><input type="text" data-answer="0" data-q="7" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="1" data-q="7" data-row="1" data-col="2"></td>
+                            <td><input type="text" data-answer="1" data-q="7" data-row="1" data-col="3"></td>
+                            <td><input type="text" data-answer="i" data-q="7" data-row="1" data-col="4"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="7" data-row="2" data-col="0"></td>
+                            <td style="background: #f0f0f0;">it is.</td>
+                            <td><input type="text" data-answer="0" data-q="7" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="2" data-q="7" data-row="2" data-col="2"></td>
+                            <td><input type="text" data-answer="2" data-q="7" data-row="2" data-col="3"></td>
+                            <td><input type="text" data-answer="t" data-q="7" data-row="2" data-col="4"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3" data-q="7" data-row="3" data-col="0"></td>
+                            <td style="background: #f0f0f0;">it is.</td>
+                            <td><input type="text" data-answer="1" data-q="7" data-row="3" data-col="1"></td>
+                            <td><input type="text" data-answer="3" data-q="7" data-row="3" data-col="2"></td>
+                            <td><input type="text" data-answer="2" data-q="7" data-row="3" data-col="3"></td>
+                            <td><input type="text" data-answer=" " data-q="7" data-row="3" data-col="4" placeholder="space"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="4" data-q="7" data-row="4" data-col="0"></td>
+                            <td style="background: #f0f0f0;">it is.</td>
+                            <td><input type="text" data-answer="1" data-q="7" data-row="4" data-col="1"></td>
+                            <td><input type="text" data-answer="4" data-q="7" data-row="4" data-col="2"></td>
+                            <td><input type="text" data-answer="3" data-q="7" data-row="4" data-col="3"></td>
+                            <td><input type="text" data-answer="i" data-q="7" data-row="4" data-col="4"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="5" data-q="7" data-row="5" data-col="0"></td>
+                            <td style="background: #f0f0f0;">it is.</td>
+                            <td><input type="text" data-answer="1" data-q="7" data-row="5" data-col="1"></td>
+                            <td><input type="text" data-answer="5" data-q="7" data-row="5" data-col="2"></td>
+                            <td><input type="text" data-answer="4" data-q="7" data-row="5" data-col="3"></td>
+                            <td><input type="text" data-answer="s" data-q="7" data-row="5" data-col="4"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;">Exit loop</td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="." data-q="7" data-row="6" data-col="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin: 20px 0; color: #555;"><strong>What value is returned by the method?</strong></p>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span>Return value:</span>
+                <input type="text" id="return7" data-answer="2" style="width: 150px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px;">
+                <button class="btn-check" onclick="checkReturn(7)" style="padding: 8px 20px;">Check</button>
+            </div>
+            <div class="feedback" id="feedback7-return"></div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(7)">Check Table</button>
+                <button class="btn-hint" onclick="toggleHint(7)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(7)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(7)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint7">
+                <div class="hint-title">💡 Hint:</div>
+                <p>The string is "it is." which has characters at indices: [0]='i', [1]='t', [2]=' ', [3]='i', [4]='s', [5]='.'</p>
+                <p>Loop runs until it finds the period. Count spaces in C, non-space characters in T. The return value calculates average word length: T / (C + 1).</p>
+            </div>
+
+            <div class="feedback" id="feedback7"></div>
+
+            <div class="answer-section" id="solution7">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <div class="trace-table-container">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>Loop Iteration</th>
+                                <th>C</th>
+                                <th>S</th>
+                                <th>T</th>
+                                <th>STR[S]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+                            <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>i</td></tr>
+                            <tr><td>2</td><td>0</td><td>2</td><td>2</td><td>t</td></tr>
+                            <tr><td>3</td><td>1</td><td>3</td><td>2</td><td>(space)</td></tr>
+                            <tr><td>4</td><td>1</td><td>4</td><td>3</td><td>i</td></tr>
+                            <tr><td>5</td><td>1</td><td>5</td><td>4</td><td>s</td></tr>
+                            <tr><td>Exit</td><td colspan="4">STR[5] = '.'</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 15px; color: #2e7d32;"><strong>Return value: 2</strong></p>
+                <p style="margin-top: 10px; color: #2e7d32;"><strong>Explanation:</strong> The algorithm counts spaces (C=1) and non-space characters (T=4) until it hits a period. It calculates average word length: T / (C + 1) = 4 / 2 = 2. The string "it is" has 2 words with 4 total letters, so average length is 2.</p>
+            </div>
+        </div>
+
+        <!-- Question 8: Prime Number Checker -->
+        <div class="question-card" id="q6">
+            <span class="question-number">Question 6</span>
+            <span class="difficulty hard">Hard</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: Nested For Loops</div>
+                <div class="code-block">num = 0
+total = 0
+
+FOR i = 1 TO 3
+    FOR j = 1 TO 3
+        num = j * i
+        total = total + num
+    ENDFOR
+ENDFOR
+
+OUTPUT total</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+            <div class="note-box">
+                <strong>Note:</strong> In nested loops, the inner loop completes all its iterations for each iteration of the outer loop. Pay close attention to which loop variable is changing!
+            </div>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>i</th>
+                            <th>j</th>
+                            <th>num</th>
+                            <th>total</th>
+                            <th>output</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table6">
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="0" data-q="6" data-row="0" data-col="0"></td>
+                            <td><input type="text" data-answer="0" data-q="6" data-row="0" data-col="1"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="0"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="2"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="1" data-col="3"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="2" data-col="0"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="2" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="3" data-col="0"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="3" data-col="1"></td>
+                            <td><input type="text" data-answer="6" data-q="6" data-row="3" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="4" data-col="0"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="4" data-col="1"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="4" data-col="2"></td>
+                            <td><input type="text" data-answer="8" data-q="6" data-row="4" data-col="3"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="5" data-col="0"></td>
+                            <td><input type="text" data-answer="4" data-q="6" data-row="5" data-col="1"></td>
+                            <td><input type="text" data-answer="12" data-q="6" data-row="5" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="6" data-col="0"></td>
+                            <td><input type="text" data-answer="6" data-q="6" data-row="6" data-col="1"></td>
+                            <td><input type="text" data-answer="18" data-q="6" data-row="6" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="7" data-col="0"></td>
+                            <td><input type="text" data-answer="1" data-q="6" data-row="7" data-col="1"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="7" data-col="2"></td>
+                            <td><input type="text" data-answer="21" data-q="6" data-row="7" data-col="3"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="6" data-row="8" data-col="0"></td>
+                            <td><input type="text" data-answer="6" data-q="6" data-row="8" data-col="1"></td>
+                            <td><input type="text" data-answer="27" data-q="6" data-row="8" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="6" data-row="9" data-col="0"></td>
+                            <td><input type="text" data-answer="9" data-q="6" data-row="9" data-col="1"></td>
+                            <td><input type="text" data-answer="36" data-q="6" data-row="9" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="36" data-q="6" data-row="10" data-col="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(6)">Check Answers</button>
+                <button class="btn-hint" onclick="toggleHint(6)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(6)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(6)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint6">
+                <div class="hint-title">💡 Hint:</div>
+                <p>For each value of i (1, 2, 3), j runs through all its values (1, 2, 3). So when i=1, j goes 1→2→3. Then i becomes 2, and j again goes 1→2→3. Calculate num = j × i and add to total each time. This creates a multiplication table sum!</p>
+            </div>
+
+            <div class="feedback" id="feedback6"></div>
+
+            <div class="answer-section" id="solution6">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <p style="margin-bottom: 15px; color: #2e7d32;"><strong>Explanation:</strong> This is a nested loop calculating the sum of all products in a 3×3 multiplication table: (1×1 + 1×2 + 1×3) + (2×1 + 2×2 + 2×3) + (3×1 + 3×2 + 3×3) = 1+2+3+2+4+6+3+6+9 = 36</p>
+            </div>
+        </div>
+
+        <!-- Question 8: Prime Number Checker -->
+        <div class="question-card" id="q8">
+            <span class="question-number">Question 8</span>
+            <span class="difficulty hard">Hard</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: Prime Number Checker</div>
+                <div class="code-block">method PRIME(int NUMBER)
+    FACTOR = 2
+    FOUND = false
+    P = false
+    
+    loop while (FACTOR * FACTOR) <= NUMBER AND NOT FOUND
+        if NUMBER mod FACTOR = 0 then
+            FOUND = true
+        end if
+        FACTOR = FACTOR + 1
+    end loop
+    
+    P = NOT FOUND
+    return P
+end method</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;"><strong>Part a) Complete the trace table for PRIME(9):</strong></p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>Loop Iteration</th>
+                            <th>NUMBER</th>
+                            <th>FACTOR</th>
+                            <th>FOUND</th>
+                            <th>P</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table8a">
+                        <tr>
+                            <td><input type="text" data-answer="0" data-q="8a" data-row="0" data-col="0"></td>
+                            <td style="background: #f0f0f0;">9</td>
+                            <td><input type="text" data-answer="2" data-q="8a" data-row="0" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="8a" data-row="0" data-col="2"></td>
+                            <td><input type="text" data-answer="false" data-q="8a" data-row="0" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="8a" data-row="1" data-col="0"></td>
+                            <td style="background: #f0f0f0;">9</td>
+                            <td><input type="text" data-answer="3" data-q="8a" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="8a" data-row="1" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="8a" data-row="2" data-col="0"></td>
+                            <td style="background: #f0f0f0;">9</td>
+                            <td><input type="text" data-answer="4" data-q="8a" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="true" data-q="8a" data-row="2" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;">Exit loop</td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="false" data-q="8a" data-row="3" data-col="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin: 20px 0; color: #555;"><strong>Part b) Complete the trace table for PRIME(20):</strong></p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>Loop Iteration</th>
+                            <th>NUMBER</th>
+                            <th>FACTOR</th>
+                            <th>FOUND</th>
+                            <th>P</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table8b">
+                        <tr>
+                            <td><input type="text" data-answer="0" data-q="8b" data-row="0" data-col="0"></td>
+                            <td style="background: #f0f0f0;">20</td>
+                            <td><input type="text" data-answer="2" data-q="8b" data-row="0" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="8b" data-row="0" data-col="2"></td>
+                            <td><input type="text" data-answer="false" data-q="8b" data-row="0" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="8b" data-row="1" data-col="0"></td>
+                            <td style="background: #f0f0f0;">20</td>
+                            <td><input type="text" data-answer="3" data-q="8b" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="true" data-q="8b" data-row="1" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;">Exit loop</td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="false" data-q="8b" data-row="2" data-col="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin: 20px 0; color: #555;"><strong>Part c) Complete the trace table for PRIME(17):</strong></p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>Loop Iteration</th>
+                            <th>NUMBER</th>
+                            <th>FACTOR</th>
+                            <th>FOUND</th>
+                            <th>P</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table8c">
+                        <tr>
+                            <td><input type="text" data-answer="0" data-q="8c" data-row="0" data-col="0"></td>
+                            <td style="background: #f0f0f0;">17</td>
+                            <td><input type="text" data-answer="2" data-q="8c" data-row="0" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="8c" data-row="0" data-col="2"></td>
+                            <td><input type="text" data-answer="false" data-q="8c" data-row="0" data-col="3"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="8c" data-row="1" data-col="0"></td>
+                            <td style="background: #f0f0f0;">17</td>
+                            <td><input type="text" data-answer="3" data-q="8c" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="8c" data-row="1" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="8c" data-row="2" data-col="0"></td>
+                            <td style="background: #f0f0f0;">17</td>
+                            <td><input type="text" data-answer="4" data-q="8c" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="8c" data-row="2" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3" data-q="8c" data-row="3" data-col="0"></td>
+                            <td style="background: #f0f0f0;">17</td>
+                            <td><input type="text" data-answer="5" data-q="8c" data-row="3" data-col="1"></td>
+                            <td><input type="text" data-answer="false" data-q="8c" data-row="3" data-col="2"></td>
+                            <td style="background: #f0f0f0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;">Exit loop</td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td colspan="2" style="background: #f0f0f0; font-size: 0.85em;">5*5 = 25 > 17, loop exits</td>
+                            <td><input type="text" data-answer="true" data-q="8c" data-row="4" data-col="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAllPrimes()">Check All Parts</button>
+                <button class="btn-hint" onclick="toggleHint(8)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(8)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearAllPrimes()">Clear All</button>
+            </div>
+
+            <div class="hint-section" id="hint8">
+                <div class="hint-title">💡 Hint:</div>
+                <p><strong>Key insight:</strong> The loop checks if NUMBER is divisible by any FACTOR from 2 up to √NUMBER.</p>
+                <ul style="margin-left: 25px; margin-top: 10px;">
+                    <li>Loop continues while FACTOR² ≤ NUMBER AND no factor found yet</li>
+                    <li>If NUMBER mod FACTOR = 0, then FOUND becomes true (not prime)</li>
+                    <li>After loop: P = NOT FOUND (if no factors found, it's prime!)</li>
+                    <li>For 9: 3² = 9, so loop checks 2, then 3 (9 mod 3 = 0) → not prime</li>
+                    <li>For 20: 2² = 4 ≤ 20, 20 mod 2 = 0 immediately → not prime</li>
+                    <li>For 17: checks 2, 3, 4, then 5² = 25 > 17, exits → prime!</li>
+                </ul>
+            </div>
+
+            <div class="feedback" id="feedback8"></div>
+
+            <div class="answer-section" id="solution8">
+                <div class="answer-title">✓ Complete Solution:</div>
+                
+                <p style="color: #2e7d32; margin-bottom: 15px;"><strong>Part a) PRIME(9) returns false</strong> - 9 is divisible by 3, so it's not prime.</p>
+                <p style="color: #2e7d32; margin-bottom: 15px;"><strong>Part b) PRIME(20) returns false</strong> - 20 is divisible by 2, so it's not prime.</p>
+                <p style="color: #2e7d32; margin-bottom: 15px;"><strong>Part c) PRIME(17) returns true</strong> - 17 has no divisors from 2 to 4, so it's prime!</p>
+                
+                <p style="margin-top: 20px; color: #2e7d32;"><strong>How the algorithm works:</strong></p>
+                <p style="color: #555; line-height: 1.8;">The algorithm efficiently checks primality by testing divisibility from 2 up to the square root of NUMBER. If any factor divides evenly (mod = 0), FOUND becomes true and the loop can exit early. The key optimization is FACTOR * FACTOR <= NUMBER, which means we only need to check up to √NUMBER. If no factors are found, the number is prime (P = NOT FOUND = true).</p>
+            </div>
+        </div>
+
+        <!-- Question 9: Triangular Number with Variable-Bound Nested Loop -->
+        <div class="question-card" id="q9">
+            <span class="question-number">Question 9</span>
+            <span class="difficulty hard">Hard</span>
+            
+            <div class="algorithm-section">
+                <div class="algorithm-title">Algorithm: Triangular Number Calculator</div>
+                <div class="note-box">
+                    <strong>Challenge:</strong> This nested loop has a twist - the inner loop bound depends on the outer loop variable!
+                </div>
+                <div class="code-block">TOTAL = 0
+
+loop I from 0 to 4
+    loop J from 0 to I
+        TOTAL = TOTAL + 1
+    end loop
+end loop
+
+output TOTAL</div>
+            </div>
+
+            <p style="margin: 15px 0; color: #555;">Complete the trace table below:</p>
+
+            <div class="trace-table-container">
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>I</th>
+                            <th>J</th>
+                            <th>TOTAL</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table9">
+                        <tr>
+                            <td style="background: #f0f0f0;">Init</td>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="0" data-q="9" data-row="0" data-col="0"></td>
+                            <td style="background: #f0f0f0; font-size: 0.85em;">Before loops</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="0" data-q="9" data-row="1" data-col="0"></td>
+                            <td><input type="text" data-answer="0" data-q="9" data-row="1" data-col="1"></td>
+                            <td><input type="text" data-answer="1" data-q="9" data-row="1" data-col="2"></td>
+                            <td style="background: #f0f0f0; font-size: 0.85em;">J: 0 to 0 (1 time)</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="1" data-q="9" data-row="2" data-col="0"></td>
+                            <td><input type="text" data-answer="0" data-q="9" data-row="2" data-col="1"></td>
+                            <td><input type="text" data-answer="2" data-q="9" data-row="2" data-col="2"></td>
+                            <td style="background: #f0f0f0; font-size: 0.85em; text-align: left;" rowspan="2">J: 0 to 1 (2 times)</td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="1" data-q="9" data-row="3" data-col="0"></td>
+                            <td><input type="text" data-answer="3" data-q="9" data-row="3" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="2" data-q="9" data-row="4" data-col="0"></td>
+                            <td><input type="text" data-answer="0" data-q="9" data-row="4" data-col="1"></td>
+                            <td><input type="text" data-answer="4" data-q="9" data-row="4" data-col="2"></td>
+                            <td style="background: #f0f0f0; font-size: 0.85em; text-align: left;" rowspan="3">J: 0 to 2 (3 times)</td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="1" data-q="9" data-row="5" data-col="0"></td>
+                            <td><input type="text" data-answer="5" data-q="9" data-row="5" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="9" data-row="6" data-col="0"></td>
+                            <td><input type="text" data-answer="6" data-q="9" data-row="6" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="3" data-q="9" data-row="7" data-col="0"></td>
+                            <td><input type="text" data-answer="0" data-q="9" data-row="7" data-col="1"></td>
+                            <td><input type="text" data-answer="7" data-q="9" data-row="7" data-col="2"></td>
+                            <td style="background: #f0f0f0; font-size: 0.85em; text-align: left;" rowspan="4">J: 0 to 3 (4 times)</td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="1" data-q="9" data-row="8" data-col="0"></td>
+                            <td><input type="text" data-answer="8" data-q="9" data-row="8" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="9" data-row="9" data-col="0"></td>
+                            <td><input type="text" data-answer="9" data-q="9" data-row="9" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="9" data-row="10" data-col="0"></td>
+                            <td><input type="text" data-answer="10" data-q="9" data-row="10" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" data-answer="4" data-q="9" data-row="11" data-col="0"></td>
+                            <td><input type="text" data-answer="0" data-q="9" data-row="11" data-col="1"></td>
+                            <td><input type="text" data-answer="11" data-q="9" data-row="11" data-col="2"></td>
+                            <td style="background: #f0f0f0; font-size: 0.85em; text-align: left;" rowspan="5">J: 0 to 4 (5 times)</td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="1" data-q="9" data-row="12" data-col="0"></td>
+                            <td><input type="text" data-answer="12" data-q="9" data-row="12" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="2" data-q="9" data-row="13" data-col="0"></td>
+                            <td><input type="text" data-answer="13" data-q="9" data-row="13" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="3" data-q="9" data-row="14" data-col="0"></td>
+                            <td><input type="text" data-answer="14" data-q="9" data-row="14" data-col="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="background: #f0f0f0;"></td>
+                            <td><input type="text" data-answer="4" data-q="9" data-row="15" data-col="0"></td>
+                            <td><input type="text" data-answer="15" data-q="9" data-row="15" data-col="1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin: 20px 0; color: #555;"><strong>What value is output?</strong></p>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span>Output:</span>
+                <input type="text" id="output9" data-answer="15" style="width: 150px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px;">
+                <button class="btn-check" onclick="checkOutput(9)" style="padding: 8px 20px;">Check</button>
+            </div>
+            <div class="feedback" id="feedback9-output"></div>
+
+            <div class="button-group">
+                <button class="btn-check" onclick="checkAnswers(9)">Check Table</button>
+                <button class="btn-hint" onclick="toggleHint(9)">Show Hint</button>
+                <button class="btn-reveal" onclick="toggleAnswer(9)">Reveal Solution</button>
+                <button class="btn-clear" onclick="clearTable(9)">Clear Table</button>
+            </div>
+
+            <div class="hint-section" id="hint9">
+                <div class="hint-title">💡 Hint:</div>
+                <p><strong>This calculates a triangular number!</strong> When I=0, J runs 0→0 (1 time). When I=1, J runs 0→1 (2 times). When I=2, J runs 0→2 (3 times), etc.</p>
+                <p>Total iterations: 1 + 2 + 3 + 4 + 5 = ?</p>
+                <p>The pattern is: for each value of I, the inner loop runs (I+1) times, adding that many to TOTAL.</p>
+            </div>
+
+            <div class="feedback" id="feedback9"></div>
+
+            <div class="answer-section" id="solution9">
+                <div class="answer-title">✓ Complete Solution:</div>
+                <p style="margin-bottom: 15px; color: #2e7d32;"><strong>Output: 15</strong></p>
+                <p style="color: #2e7d32; line-height: 1.8;"><strong>Explanation:</strong> This algorithm calculates the 5th triangular number. For each value of I (0 to 4), the inner loop J runs from 0 to I, incrementing TOTAL each time:</p>
+                <ul style="margin-left: 25px; color: #555; line-height: 1.8;">
+                    <li>I=0: J runs once (0 to 0) → TOTAL = 1</li>
+                    <li>I=1: J runs twice (0 to 1) → TOTAL = 3</li>
+                    <li>I=2: J runs 3 times (0 to 2) → TOTAL = 6</li>
+                    <li>I=3: J runs 4 times (0 to 3) → TOTAL = 10</li>
+                    <li>I=4: J runs 5 times (0 to 4) → TOTAL = 15</li>
+                </ul>
+                <p style="margin-top: 15px; color: #2e7d32;">This gives us 1+2+3+4+5 = 15, which is the sum formula n(n+1)/2 = 5×6/2 = 15</p>
+            </div>
+        </div>
+
         <footer>
             <p>© 2025 IB Trace Tables Practice | DP Computer Science</p>
             <p style="margin-top: 10px; font-size: 0.9em;">Practice makes perfect! Work through each trace table carefully.</p>
@@ -1163,7 +1815,7 @@ OUTPUT total</div>
         }
 
         function loadProgress() {
-            for (let q = 1; q <= 6; q++) {
+            for (let q = 1; q <= 9; q++) {
                 const saved = localStorage.getItem(`trace_q${q}`);
                 if (saved) {
                     const data = JSON.parse(saved);
@@ -1173,6 +1825,94 @@ OUTPUT total</div>
                             input.value = data[index];
                         }
                     });
+                }
+                
+                // Also load for multi-part questions
+                if (q === 8) {
+                    ['8a', '8b', '8c'].forEach(part => {
+                        const saved = localStorage.getItem(`trace_q${part}`);
+                        if (saved) {
+                            const data = JSON.parse(saved);
+                            const inputs = document.querySelectorAll(`input[data-q="${part}"]`);
+                            inputs.forEach((input, index) => {
+                                if (data[index]) {
+                                    input.value = data[index];
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        }
+
+        // Check return value for question 7
+        function checkReturn(questionNum) {
+            const input = document.getElementById(`return${questionNum}`);
+            const feedback = document.getElementById(`feedback${questionNum}-return`);
+            
+            const userAnswer = normalizeAnswer(input.value);
+            const correctAnswer = normalizeAnswer(input.dataset.answer);
+            
+            feedback.classList.add('visible');
+            
+            if (userAnswer === correctAnswer) {
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+                feedback.className = 'feedback visible success';
+                feedback.innerHTML = '🎉 Correct! The method returns 2.';
+            } else {
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+                feedback.className = 'feedback visible error';
+                feedback.innerHTML = '❌ Not quite. Calculate T / (C + 1) using your final values.';
+            }
+        }
+
+        // Check output for question 9
+        function checkOutput(questionNum) {
+            const input = document.getElementById(`output${questionNum}`);
+            const feedback = document.getElementById(`feedback${questionNum}-output`);
+            
+            const userAnswer = normalizeAnswer(input.value);
+            const correctAnswer = normalizeAnswer(input.dataset.answer);
+            
+            feedback.classList.add('visible');
+            
+            if (userAnswer === correctAnswer) {
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+                feedback.className = 'feedback visible success';
+                feedback.innerHTML = '🎉 Perfect! TOTAL = 15 (the 5th triangular number: 1+2+3+4+5).';
+            } else {
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+                feedback.className = 'feedback visible error';
+                feedback.innerHTML = `❌ Not quite. Count total loop iterations: when I=0 (1 time), I=1 (2 times), I=2 (3 times), etc.`;
+            }
+        }
+
+        // Check all parts of prime question
+        function checkAllPrimes() {
+            checkAnswers('8a');
+            checkAnswers('8b');
+            checkAnswers('8c');
+            
+            // Overall feedback
+            const feedback = document.getElementById('feedback8');
+            feedback.classList.add('visible');
+            feedback.className = 'feedback visible success';
+            feedback.innerHTML = '✅ All three parts checked! Review any red cells and compare with the solution.';
+        }
+
+        // Clear all parts of prime question
+        function clearAllPrimes() {
+            if (confirm('Clear all answers for all three parts of the prime question?')) {
+                clearTable('8a');
+                clearTable('8b');
+                clearTable('8c');
+                const feedback = document.getElementById('feedback8');
+                if (feedback) {
+                    feedback.classList.remove('visible');
                 }
             }
         }
